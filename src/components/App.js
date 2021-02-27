@@ -21,9 +21,12 @@ class App extends Component {
     this.setState({ account: accounts[0] })
 
     const networkId = await web3.eth.net.getId()
-
     // Load DaiToken
     const daiTokenData = DaiToken.networks[networkId]
+
+    web3.eth.net.getNetworkType()
+    .then(console.log);
+
     if(daiTokenData) {
       const daiToken = new web3.eth.Contract(DaiToken.abi, daiTokenData.address)
       this.setState({ daiToken })
@@ -70,6 +73,8 @@ class App extends Component {
       window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
     }
   }
+
+  
 
   stakeTokens = (amount) => {
     this.setState({ loading: true })
